@@ -1,0 +1,57 @@
+body {
+  background: #f0f0f0;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: sans-serif;
+  display: flex;
+}
+
+.container {
+  background: #fff;
+  border-radius: 12px;
+  width: 350px;
+  padding: 30px;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+}
+
+form button {
+  color: #fff;
+  cursor: pointer;
+  background: #4caf50;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+}
+
+form button:hover {
+  background: #45a049;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-info h3 {
+  margin-bottom: 20px;
+}
+
+.profile-info p {
+  margin: 8px 0;
+}
+/*# sourceMappingURL=form.77a9bc14.css.map */

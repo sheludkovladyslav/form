@@ -1,0 +1,15 @@
+{
+  "name": "form",
+  "version": "1.0.0",
+  "devDependencies": {
+    "parcel": "^2.15.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
