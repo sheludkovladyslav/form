@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin"
+    },
+    {
+      "id": "85b1",
+      "username": "vlad",
+      "email": "vladsh2103@gmail.com",
+      "password": "123123asd#aA"
+    },
+    {
+      "id": "1536",
+      "username": "vlad",
+      "email": "vladsh2103@gmail.com",
+      "password": "123123asd#aA"
+    },
+    {
+      "id": "aad0",
+      "username": "maks",
+      "email": "maksshel2111@gmail.com",
+      "password": "123123asd#aA"
+    },
+    {
+      "id": "bfe5",
+      "username": "nikita",
+      "email": "nikita@gmail.com",
+      "password": "123123asd#aA"
+    },
+    {
+      "id": "597f",
+      "username": "vlados",
+      "email": "vlados@gmail.com",
+      "password": "123123asd#aA"
+    }
+  ]
+}

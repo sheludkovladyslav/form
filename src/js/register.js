@@ -5,6 +5,9 @@ const form = document.querySelector("#registerForm");
 
 const formSendHandler = (event) => {
   event.preventDefault();
+
+  let hasError = false;
+
   const userName = form.querySelector("#username");
   const userPassword = form.querySelector("#password");
   const userConfirm = form.querySelector("#confirmPassword");
@@ -16,60 +19,96 @@ const formSendHandler = (event) => {
   const userEmailValue = userEmail.value.trim();
 
   if (!userEmailValue.includes("@")) {
-    const message = "Емейл повинен містити @";
-    alert(message);
+    alert("Емейл повинен містити @");
     userEmail.style.border = "1px solid red";
+    hasError = true;
   } else {
     userEmail.style.border = "1px solid green";
   }
 
   if (![...userNameValue].every((letter) => latinLetters.includes(letter))) {
-    const message = "Логін повинен складатись лише з латинських літер!";
-    alert(message);
+    alert("Логін повинен складатись лише з латинських літер!");
     userName.style.border = "1px solid red";
+    hasError = true;
   } else {
     userName.style.border = "1px solid green";
   }
 
   if (![...userPasswordValue].some((letter) => symbols.includes(letter))) {
-    const message = "Пароль повинен включати в собі спеціальний символ!";
-    alert(message);
+    alert("Пароль повинен включати спеціальний символ!");
     userPassword.style.border = "1px solid red";
+    hasError = true;
   } else {
     userPassword.style.border = "1px solid green";
   }
 
   if (userPasswordValue.toLowerCase() === userPasswordValue) {
-    const message = "Пароль повинен включати в собі хоча б одну велику букву!";
-    alert(message);
+    alert("Пароль повинен включати хоча б одну велику букву!");
     userPassword.style.border = "1px solid red";
+    hasError = true;
   } else {
     userPassword.style.border = "1px solid green";
   }
 
   if (![...userPasswordValue].some((number) => "0123456789".includes(number))) {
-    const message = "Пароль повинен містити цифру!";
-    alert(message);
+    alert("Пароль повинен містити цифру!");
     userPassword.style.border = "1px solid red";
+    hasError = true;
   } else {
     userPassword.style.border = "1px solid green";
   }
 
-  if (userPasswordValue.length >= 8) {
-    userPassword.style.border = "1px solid green";
-  } else {
-    const message = "Пароль повинен містити більше ніж 8 символів";
-    alert(message);
+  if (userPasswordValue.length < 8) {
+    alert("Пароль повинен містити більше ніж 8 символів");
     userPassword.style.border = "1px solid red";
+    hasError = true;
+  } else {
+    userPassword.style.border = "1px solid green";
   }
 
-  if (userPasswordValue === userConfirmValue) {
-    userConfirm.style.border = "1px solid green";
-  } else {
-    const message = "Паролі повинні сходитись!";
-    alert(message);
+  if (userPasswordValue !== userConfirmValue) {
+    alert("Паролі повинні співпадати!");
     userConfirm.style.border = "1px solid red";
+    hasError = true;
+  } else {
+    userConfirm.style.border = "1px solid green";
+  }
+
+  if (!hasError) {
+    const newUser = {
+      username: userNameValue,
+      email: userEmailValue,
+      password: userPasswordValue,
+    };
+
+    createAccount(newUser);
+    form.reset();
+    alert("Реєстрація успішна, дякую!");
+    window.location.href = "/index.html";
   }
 };
 
 form.addEventListener("submit", formSendHandler);
+
+const createAccount = async (newUser) => {
+  const url = "http://localhost:3000/users";
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Помилка при створенні юзера.");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Помилка при додаванні юзера.", error);
+  }
+};

@@ -160,7 +160,7 @@
       });
     }
   }
-})({"4frxX":[function(require,module,exports,__globalThis) {
+})({"56d9A":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -168,7 +168,7 @@ var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "ae8feb045d4866ef";
+module.bundle.HMR_BUNDLE_ID = "d3254df33b0dc6a1";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -666,103 +666,47 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     }
 }
 
-},{}],"3kyqU":[function(require,module,exports,__globalThis) {
+},{}],"fEc1V":[function(require,module,exports,__globalThis) {
+var _apiJs = require("./api.js");
+document.addEventListener("DOMContentLoaded", ()=>{
+    const form = document.querySelector("#loginForm");
+    const loginHandler = async (event)=>{
+        event.preventDefault();
+        const username = document.querySelector("#loginUsername").value.trim();
+        const pass = document.querySelector("#loginPassword").value.trim();
+        const users = await (0, _apiJs.getUsers)();
+        const user = users.find((user)=>user.username === username && user.password === pass);
+        if (user) {
+            localStorage.setItem("username", username);
+            alert(`\u{412}\u{445}\u{456}\u{434} \u{443}\u{441}\u{43F}\u{456}\u{448}\u{43D}\u{438}\u{439}! \u{414}\u{44F}\u{43A}\u{443}\u{44E}, ${username}`);
+            window.location.href = "./partials/profile.html";
+        } else alert("\u0412\u0445\u0456\u0434 \u043D\u0435\u0443\u0441\u043F\u0456\u0448\u043D\u0438\u0439! \u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0442\u0435 \u043B\u043E\u0433\u0456\u043D \u0442\u0430 \u043F\u0430\u0440\u043E\u043B\u044C!");
+    };
+    form.addEventListener("submit", loginHandler);
+});
+
+},{"./api.js":"4yEOZ"}],"4yEOZ":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _latinLettersJson = require("../data/latinLetters.json");
-var _latinLettersJsonDefault = parcelHelpers.interopDefault(_latinLettersJson);
-var _symbolsJson = require("../data/symbols.json");
-var _symbolsJsonDefault = parcelHelpers.interopDefault(_symbolsJson);
-const form = document.querySelector("#registerForm");
-const formSendHandler = (event)=>{
-    event.preventDefault();
-    let hasError = false;
-    const userName = form.querySelector("#username");
-    const userPassword = form.querySelector("#password");
-    const userConfirm = form.querySelector("#confirmPassword");
-    const userEmail = form.querySelector("#email");
-    const userNameValue = userName.value.trim();
-    const userPasswordValue = userPassword.value;
-    const userConfirmValue = userConfirm.value;
-    const userEmailValue = userEmail.value.trim();
-    if (!userEmailValue.includes("@")) {
-        alert("\u0415\u043C\u0435\u0439\u043B \u043F\u043E\u0432\u0438\u043D\u0435\u043D \u043C\u0456\u0441\u0442\u0438\u0442\u0438 @");
-        userEmail.style.border = "1px solid red";
-        hasError = true;
-    } else userEmail.style.border = "1px solid green";
-    if (![
-        ...userNameValue
-    ].every((letter)=>(0, _latinLettersJsonDefault.default).includes(letter))) {
-        alert("\u041B\u043E\u0433\u0456\u043D \u043F\u043E\u0432\u0438\u043D\u0435\u043D \u0441\u043A\u043B\u0430\u0434\u0430\u0442\u0438\u0441\u044C \u043B\u0438\u0448\u0435 \u0437 \u043B\u0430\u0442\u0438\u043D\u0441\u044C\u043A\u0438\u0445 \u043B\u0456\u0442\u0435\u0440!");
-        userName.style.border = "1px solid red";
-        hasError = true;
-    } else userName.style.border = "1px solid green";
-    if (![
-        ...userPasswordValue
-    ].some((letter)=>(0, _symbolsJsonDefault.default).includes(letter))) {
-        alert("\u041F\u0430\u0440\u043E\u043B\u044C \u043F\u043E\u0432\u0438\u043D\u0435\u043D \u0432\u043A\u043B\u044E\u0447\u0430\u0442\u0438 \u0441\u043F\u0435\u0446\u0456\u0430\u043B\u044C\u043D\u0438\u0439 \u0441\u0438\u043C\u0432\u043E\u043B!");
-        userPassword.style.border = "1px solid red";
-        hasError = true;
-    } else userPassword.style.border = "1px solid green";
-    if (userPasswordValue.toLowerCase() === userPasswordValue) {
-        alert("\u041F\u0430\u0440\u043E\u043B\u044C \u043F\u043E\u0432\u0438\u043D\u0435\u043D \u0432\u043A\u043B\u044E\u0447\u0430\u0442\u0438 \u0445\u043E\u0447\u0430 \u0431 \u043E\u0434\u043D\u0443 \u0432\u0435\u043B\u0438\u043A\u0443 \u0431\u0443\u043A\u0432\u0443!");
-        userPassword.style.border = "1px solid red";
-        hasError = true;
-    } else userPassword.style.border = "1px solid green";
-    if (![
-        ...userPasswordValue
-    ].some((number)=>"0123456789".includes(number))) {
-        alert("\u041F\u0430\u0440\u043E\u043B\u044C \u043F\u043E\u0432\u0438\u043D\u0435\u043D \u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0446\u0438\u0444\u0440\u0443!");
-        userPassword.style.border = "1px solid red";
-        hasError = true;
-    } else userPassword.style.border = "1px solid green";
-    if (userPasswordValue.length < 8) {
-        alert("\u041F\u0430\u0440\u043E\u043B\u044C \u043F\u043E\u0432\u0438\u043D\u0435\u043D \u043C\u0456\u0441\u0442\u0438\u0442\u0438 \u0431\u0456\u043B\u044C\u0448\u0435 \u043D\u0456\u0436 8 \u0441\u0438\u043C\u0432\u043E\u043B\u0456\u0432");
-        userPassword.style.border = "1px solid red";
-        hasError = true;
-    } else userPassword.style.border = "1px solid green";
-    if (userPasswordValue !== userConfirmValue) {
-        alert("\u041F\u0430\u0440\u043E\u043B\u0456 \u043F\u043E\u0432\u0438\u043D\u043D\u0456 \u0441\u043F\u0456\u0432\u043F\u0430\u0434\u0430\u0442\u0438!");
-        userConfirm.style.border = "1px solid red";
-        hasError = true;
-    } else userConfirm.style.border = "1px solid green";
-    if (!hasError) {
-        const newUser = {
-            username: userNameValue,
-            email: userEmailValue,
-            password: userPasswordValue
-        };
-        createAccount(newUser);
-        form.reset();
-        alert("\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F \u0443\u0441\u043F\u0456\u0448\u043D\u0430, \u0434\u044F\u043A\u0443\u044E!");
-        window.location.href = "/index.html";
-    }
-};
-form.addEventListener("submit", formSendHandler);
-const createAccount = async (newUser)=>{
-    const url = "http://localhost:3000/users";
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getUsers", ()=>getUsers);
+const getUsers = async ()=>{
     try {
+        const url = "http://localhost:3000/users";
         const response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(newUser),
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         });
-        if (!response.ok) throw new Error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u0441\u0442\u0432\u043E\u0440\u0435\u043D\u043D\u0456 \u044E\u0437\u0435\u0440\u0430.");
+        if (!response.ok) throw new Error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u0440\u0438\u043C\u0443\u0432\u0430\u043D\u043D\u0456 \u044E\u0437\u0435\u0440\u0456\u0432");
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u0434\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u0456 \u044E\u0437\u0435\u0440\u0430.", error);
+        throw new Error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u0440\u0438\u043C\u0430\u043D\u043D\u0456 \u044E\u0437\u0435\u0440\u0456\u0432.");
     }
 };
 
-},{"../data/latinLetters.json":"4bGiv","../data/symbols.json":"aTTPo","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4bGiv":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("[\"a\",\"b\",\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"o\",\"p\",\"q\",\"r\",\"s\",\"t\",\"u\",\"v\",\"w\",\"x\",\"y\",\"z\",\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\",\"I\",\"J\",\"K\",\"L\",\"M\",\"N\",\"O\",\"P\",\"Q\",\"R\",\"S\",\"T\",\"U\",\"V\",\"W\",\"X\",\"Y\",\"Z\"]");
-
-},{}],"aTTPo":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("[\"!\",\"@\",\"#\",\"$\",\"%\",\"^\",\"&\",\"*\"]");
-
-},{}],"jnFvT":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -792,6 +736,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["4frxX","3kyqU"], "3kyqU", "parcelRequire8442", {})
+},{}]},["56d9A","fEc1V"], "fEc1V", "parcelRequire8442", {})
 
-//# sourceMappingURL=registration.5d4866ef.js.map
+//# sourceMappingURL=form.3b0dc6a1.js.map
